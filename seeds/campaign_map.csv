@@ -1,0 +1,84 @@
+campaign,campaign_clean,campaign_family,campaign_goal,reviewed,notes,n_uses,first_used,last_used,total_discount_thb,first_visit_rate
+Hair color ลด 10% ในเดือนเกิด,Hair color ลด 10% ในเดือนเกิด,birthday,retention,false,,20,2022-10-27,2026-02-21,3484.0,0.45
+Hair color ลด 20% ในเดือนเกิด,Hair color ลด 20% ในเดือนเกิด,birthday,retention,false,,2,2024-12-05,2025-06-19,1200.0,0.0
+3.Hair color ลด 15% ในเดือนเกิด,Hair color ลด 15% ในเดือนเกิด,birthday,retention,false,,1,2023-10-01,2023-10-01,540.0,0.0
+Hair color ลด 15% ในเดือนเกิด,Hair color ลด 15% ในเดือนเกิด,birthday,retention,false,,1,2024-10-16,2024-10-16,450.0,0.0
+ทำสีลด 10% เดือนเกิด 1 ครั้ง,ทำสีลด 10% เดือนเกิด 1 ครั้ง,birthday,retention,false,,1,2026-04-09,2026-04-09,150.0,1.0
+ทำสีลด 20% เดือนเกิด 1 ครั้ง,ทำสีลด 20% เดือนเกิด 1 ครั้ง,birthday,retention,false,,1,2026-10-25,2026-10-25,800.0,0.0
+สอบตกลด 50 บาท,สอบตกลด 50 บาท,campus_event,acquisition,false,,7,2022-10-05,2022-10-31,350.0,0.57
+สอบตกลด 50,สอบตกลด 50,campus_event,acquisition,false,,2,2024-10-14,2024-10-14,50.0,0.0
+BOOTH 200,BOOTH 200,campus_event,acquisition,false,,1,2023-04-09,2023-04-09,0.0,1.0
+คูปองแทนเงินสด 50 บาท,คูปองแทนเงินสด 50 บาท,cash_voucher,acquisition,false,,59,2023-01-29,2026-10-11,3235.0,0.0
+คูปองแทนเงินสด 120 บาท,คูปองแทนเงินสด 120 บาท,cash_voucher,acquisition,false,,40,2023-04-01,2026-10-15,4235.0,0.0
+คูปองแทนเงินสด 250 บาท,คูปองแทนเงินสด 250 บาท,cash_voucher,acquisition,false,,13,2024-05-17,2026-10-17,2683.0,0.0
+คูปองแทนเงินสด 1500 ราคา 1250 บาท,คูปองแทนเงินสด 1500 ราคา 1250 บาท,cash_voucher,acquisition,false,,2,2022-12-15,2022-12-15,0.0,0.0
+คูปองแทนเงินสด 650 บาท,คูปองแทนเงินสด 650 บาท,cash_voucher,acquisition,false,,1,2024-07-22,2024-07-22,650.0,0.0
+คูปองส่วนลด 500 บาท ทำสี-เคราติน,คูปองส่วนลด 500 บาท ทำสี-เคราติน,discount_coupon,acquisition,false,,1,2026-05-25,2026-05-25,500.0,1.0
+คูปองส่วนลด 500 บาท Hair Color 1ครั้ง,คูปองส่วนลด 500 บาท Hair Color 1ครั้ง,discount_coupon,acquisition,false,,1,2025-08-19,2025-08-19,500.0,0.0
+ตัดฟรี Happy hour,ตัดฟรี Happy hour,free_service,acquisition,false,,23,2023-12-07,2024-02-20,9350.0,0.13
+FREE HAIR CUT,FREE HAIR CUT,free_service,acquisition,false,,21,2023-09-02,2025-01-09,8450.0,0.19
+ทรีทเมนต์ TREATMENT ฟรี!,ทรีทเมนต์ TREATMENT ฟรี!,free_service,acquisition,false,,3,2026-09-03,2026-10-19,200.0,0.0
+KERATIN FREE,KERATIN FREE,free_service,acquisition,false,,2,2023-10-22,2023-10-28,6300.0,1.0
+COLOR FREE,COLOR FREE,free_service,acquisition,false,,1,2023-10-27,2023-10-27,3600.0,0.0
+BRAZILIAN FREE,BRAZILIAN FREE,free_service,acquisition,false,,1,2023-10-25,2023-10-25,4500.0,1.0
+ส่วนลดระบุเอง (Simple),ส่วนลดระบุเอง (Simple),manual,manual,false,,6318,2022-08-02,2026-10-31,1621018.0,0.12
+ตัดผมลด 10% เมื่อสมัครสมาชิก,ตัดผมลด 10% เมื่อสมัครสมาชิก,member_signup,acquisition,false,,7140,2022-11-03,2026-10-31,437503.0,0.37
+Silver Member.,Silver Member,member_tier,retention,false,,32,2022-11-08,2025-11-18,6280.0,0.0
+Gold Member.,Gold Member,member_tier,retention,false,,29,2023-09-16,2025-11-26,7645.0,0.0
+Platinum Member.,Platinum Member,member_tier,retention,false,,3,2024-02-13,2024-11-21,1425.0,0.0
+VIP Member.,VIP Member,member_tier,retention,false,,3,2023-07-09,2024-01-15,890.0,0.0
+Standard Member,Standard Member,member_tier,retention,false,,2,2024-02-26,2024-02-26,600.0,0.0
+10 HAIRCUTS PACKAGE 4900,10 HAIRCUTS PACKAGE 4900,package,retention,false,,242,2025-05-01,2026-10-30,13810.0,0.01
+คูปองส่วนลด 300 บาท Hair color or Keratin therapy 1 ครั้ง,คูปองส่วนลด 300 บาท Hair color or Keratin therapy 1 ครั้ง,discount_coupon,retention,false,,196,2022-10-01,2026-09-02,58148.0,0.58
+คูปองส่วนลด 300 บาท Hair color 1 ครั้ง,คูปองส่วนลด 300 บาท Hair color 1 ครั้ง,discount_coupon,retention,false,,166,2024-01-02,2026-09-29,50650.0,0.49
+STUDENT 10 HAIRCUTS PACKAGE 3500,STUDENT 10 HAIRCUTS PACKAGE 3500,package,retention,false,,150,2024-09-06,2026-02-10,10700.0,0.0
+แพคเกจตัดผมนักเรียน นักศึกษา 10 ครั้ง 4000.-,แพคเกจตัดผมนักเรียน นักศึกษา 10 ครั้ง 4000.-,package,retention,false,,69,2026-06-13,2026-10-29,90.0,0.06
+2.คูปองส่วนลด 400 บาท Hair color or Keratin therapy 1 ครั้ง,คูปองส่วนลด 400 บาท Hair color or Keratin therapy 1 ครั้ง,discount_coupon,retention,false,,26,2022-12-09,2024-03-17,10330.0,0.0
+HAIR SPA&DETOX 5 ครั้ง 2999 บาท,HAIR SPA&DETOX 5 ครั้ง 2999 บาท,package,retention,false,,25,2022-11-23,2026-01-12,200.0,0.16
+คูปองส่วนลด 400 บาท Hair color 1 ครั้ง,คูปองส่วนลด 400 บาท Hair color 1 ครั้ง,package,retention,false,,17,2024-03-12,2025-08-30,6800.0,0.0
+แพคเกจบุคคลทั่วไป ตัดผม + ดีท็อค 5 ครั้ง 3500.-,แพคเกจบุคคลทั่วไป ตัดผม + ดีท็อค 5 ครั้ง 3500.-,package,retention,false,,11,2026-09-12,2026-10-31,150.0,0.18
+"แพคเกจตัดผมพี่บัณฑิต 3,9000","แพคเกจตัดผมพี่บัณฑิต 3,9000",package,retention,false,,10,2025-08-28,2026-09-22,400.0,0.0
+คูปองส่วนลด 500 บาท Hair color 1 ครั้ง,คูปองส่วนลด 500 บาท Hair color 1 ครั้ง,discount_coupon,retention,false,,5,2024-03-28,2025-04-19,2500.0,0.0
+แพคเกจตัดผมพี่บัญฑิต 10 ครั้ง 4500.-,แพคเกจตัดผมพี่บัญฑิต 10 ครั้ง 4500.-,package,retention,false,,4,2026-10-04,2026-10-10,0.0,0.0
+คูปองส่วนลด 400 บาท Hair color or Keratin therapy 1 ครั้ง,คูปองส่วนลด 400 บาท Hair color or Keratin therapy 1 ครั้ง,discount_coupon,retention,false,,4,2023-12-28,2024-03-17,1600.0,0.0
+2.คูปองส่วนลด 700 บาท Hair color or Keratin therapy 1 ครั้ง,คูปองส่วนลด 700 บาท Hair color or Keratin therapy 1 ครั้ง,package,retention,false,,3,2023-04-21,2024-03-04,2100.0,0.0
+คูปองส่วนลด 600 บาท Hair color 1 ครั้ง,คูปองส่วนลด 600 บาท Hair color 1 ครั้ง,discount_coupon,retention,false,,3,2024-04-23,2025-05-05,1800.0,0.0
+คูปองส่วนลด 700 บาท Hair color 1 ครั้ง,คูปองส่วนลด 700 บาท Hair color 1 ครั้ง,discount_coupon,retention,false,,2,2024-03-30,2025-06-22,1400.0,0.0
+คูปองส่วนลด 500 บาท Hair color or Keratin therapy 1 ครั้ง,คูปองส่วนลด 500 บาท Hair color or Keratin therapy 1 ครั้ง,discount_coupon,retention,false,,1,2024-03-28,2024-03-28,500.0,0.0
+CU NEX ลด 20% ยกเว้นรายการฟอกสี ตัด และ สระไดร์,CU NEX ลด 20% ยกเว้นรายการฟอกสี ตัด และ สระไดร์,partner_platform,acquisition,false,,48,2022-10-03,2022-10-31,13097.0,0.79
+CUNEX COLOR 25% OFF,CUNEX COLOR 25% OFF,partner_platform,acquisition,false,,7,2023-11-15,2023-12-26,3400.0,0.29
+CUNEX PERM 15%,CUNEX PERM 15%,partner_platform,acquisition,false,,2,2025-04-12,2025-06-13,450.0,0.0
+ตัดผมฟรีตลอดชีวิต ผู้ชนะการออกแบบ LOGO ไบร์ท 2026,ตัดผมฟรีตลอดชีวิต ผู้ชนะการออกแบบ LOGO ไบร์ท 2026,prize,other,false,,5,2026-06-06,2026-09-04,0.0,0.2
+เพื่อนใหม่ 10%,เพื่อนใหม่ 10%,referral,acquisition,false,,8,2025-07-05,2025-09-19,320.0,0.88
+โปรชวนเพื่อนลด 15% เมื่อใช้จ่ายเกิน 600 บาทขึ้นไป และยกเว้น ตัดผมราคา 350 400 และ 540,โปรชวนเพื่อนลด 15% เมื่อใช้จ่ายเกิน 600 บาทขึ้นไป และยกเว้น ตัดผมราคา 350 400 และ 540,referral,acquisition,false,,6,2022-12-02,2022-12-05,3360.0,0.5
+แคมเปญ 12.12 2025,แคมเปญ 12.12 2025,seasonal,traffic,false,,12,2025-12-12,2026-02-27,68.0,0.0
+NY 2024 ลด 20% ยกเว้นตัด-สระไดร์,NY 2024 ลด 20% ยกเว้นตัด-สระไดร์,seasonal,traffic,false,,8,2024-01-02,2024-03-09,3200.0,0.0
+NY 2024 ตัดผม ฟรี!,NY 2024 ตัดผม ฟรี!,seasonal,traffic,false,,4,2024-01-15,2024-01-16,1400.0,0.0
+NY 2024 ลด 15% ยกเว้นตัด-สระไดร์,NY 2024 ลด 15% ยกเว้นตัด-สระไดร์,seasonal,traffic,false,,4,2024-01-11,2024-03-09,900.0,0.0
+NY 2024 ลด 25% ยกเว้นตัด-สระไดร์,NY 2024 ลด 25% ยกเว้นตัด-สระไดร์,seasonal,traffic,false,,3,2023-12-23,2024-02-21,2825.0,0.0
+NY 2024 สระ-ไดร์ ฟรี!,NY 2024 สระ-ไดร์ ฟรี!,seasonal,traffic,false,,2,2024-01-12,2024-01-12,400.0,0.0
+"NY 2024 ฟรี ทําสี 2,000 บาท","NY 2024 ฟรี ทําสี 2,000 บาท",seasonal,traffic,false,,2,2024-01-13,2024-01-13,4000.0,0.0
+NEW YEAR 30%,NEW YEAR 30%,seasonal,traffic,false,,1,2023-01-13,2023-01-13,1080.0,0.0
+NEW YEAR 20%,NEW YEAR 20%,seasonal,traffic,false,,1,2023-04-30,2023-04-30,240.0,0.0
+ตัดผมลด 10%,ตัดผมลด 10%,service_pct,upsell,false,,204,2022-11-09,2026-10-30,12300.0,0.46
+Keratin+Color 20% off,Keratin+Color 20% off,service_pct,upsell,false,,105,2025-12-02,2026-01-31,56440.0,0.25
+COLOR 20% OFF NOV,COLOR 20% OFF NOV,service_pct,upsell,false,,85,2023-11-01,2025-12-21,36140.0,0.29
+Keratin+Color 15% off,Keratin+Color 15% off,service_pct,upsell,false,,63,2026-02-01,2026-03-29,25635.0,0.3
+PERM 10%,PERM 10%,service_pct,upsell,false,,53,2025-03-18,2025-05-07,8370.0,0.32
+Hair color ลด 15%,Hair color ลด 15%,service_pct,upsell,false,,20,2026-10-07,2026-10-31,8070.0,0.05
+ส่วนลดทำสี กัดสี เคมี ยืด ดัด 5%,ส่วนลดทำสี กัดสี เคมี ยืด ดัด 5%,service_pct,upsell,false,,16,2022-11-10,2026-05-26,1825.0,0.44
+"Joico, Loreal 50% off","Joico, Loreal 50% off",service_pct,upsell,false,,6,2026-02-20,2026-06-07,6297.0,0.0
+ส่วนลดทำสี กัดสี เคมี ยืด ดัด 10%,ส่วนลดทำสี กัดสี เคมี ยืด ดัด 10%,service_pct,upsell,false,,5,2022-11-15,2026-04-09,790.0,0.2
+Valentine 14% off,Valentine 14% off,service_pct,upsell,false,,2,2026-02-07,2026-02-07,168.0,0.5
+BZ -20%,BZ -20%,service_pct,upsell,false,,1,2024-05-27,2024-05-27,460.0,0.0
+ส่วนลดทั้งร้าน 5%,ส่วนลดทั้งร้าน 5%,storewide_pct,traffic,false,,3686,2022-10-01,2026-10-31,329713.0,0.22
+ลดทั้งร้าน 15%,ลดทั้งร้าน 15%,storewide_pct,traffic,false,,125,2022-08-08,2022-09-30,45021.0,0.75
+1. ส่วนลดทั้งร้าน 5%,ส่วนลดทั้งร้าน 5%,storewide_pct,traffic,false,,71,2023-01-28,2024-10-12,7927.0,0.0
+ส่วนลดทั้งร้าน 10%,ส่วนลดทั้งร้าน 10%,storewide_pct,traffic,false,,14,2023-04-23,2026-07-07,3880.0,0.14
+ส่วนลดทั้งร้าน 20%,ส่วนลดทั้งร้าน 20%,storewide_pct,traffic,false,,2,2024-01-15,2024-09-17,840.0,0.0
+1. ส่วนลดทั้งร้าน 10%,ส่วนลดทั้งร้าน 10%,storewide_pct,traffic,false,,2,2024-02-25,2024-02-25,1600.0,0.0
+ลดทั้งร้าน 15% ยกเว้น รายการตัดผม และ โปรโมชั่น,ลดทั้งร้าน 15% ยกเว้น รายการตัดผม และ โปรโมชั่น,storewide_pct,traffic,false,,1,2022-09-21,2022-09-21,180.0,0.0
+ตัดผม + ทรีทเมนต์ ดีท็อก,ตัดผม + ทรีทเมนต์ ดีท็อก,unmapped,other,false,,36,2025-08-09,2026-04-21,2752.0,0.0
+ทรีทเมนต์ Joico - L'Oréal,ทรีทเมนต์ Joico - L'Oréal,unmapped,other,false,,4,2026-05-23,2026-10-07,0.0,0.25
+4. ตัดผมบุคคลทั่วไป ราคา 540 บาท,ตัดผมบุคคลทั่วไป ราคา 540 บาท,unmapped,other,false,,2,2023-05-22,2024-08-03,120.0,0.0
+4. ตัดผมบุคคลทั่วไป ราคา 500 บาท,ตัดผมบุคคลทั่วไป ราคา 500 บาท,unmapped,other,false,,1,2023-05-17,2023-05-17,100.0,0.0

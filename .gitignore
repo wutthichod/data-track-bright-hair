@@ -1,0 +1,7 @@
+.venv/
+*.duckdb
+*.duckdb.wal
+export/
+Bright-Case-Study-Dataset*
+~$*
+.DS_Store

@@ -1,0 +1,60 @@
+﻿no,group,column,dtype,unit_or_values,description,rule_or_source,null_means,null_count,values_in_data
+1,calendar,date,string,YYYY-MM-DD,"วันที่ (primary key, ใช้ join)",2022-08-01 ถึง 2026-10-31,,0,"2022-08-01, 2022-08-02, 2022-08-03, 2022-08-04"
+2,calendar,ym,string,YYYY-MM,"ปี-เดือน ใช้ join กับตารางรายเดือน (sponsorships, marketing_ads, channels, monthly_summary)",,,0,"2022-08, 2022-09, 2022-10, 2022-11"
+3,calendar,dow,int64,0–6,วันในสัปดาห์ 0=จันทร์ … 6=อาทิตย์,,,0,0 – 6 (เฉลี่ย 3.0)
+4,calendar,weekday,string,text,ชื่อวันภาษาอังกฤษ,,,0,"Monday, Tuesday, Wednesday, Thursday"
+5,calendar,is_weekend,bool,bool,เป็นวันเสาร์หรืออาทิตย์,dow >= 5,,0,True = 443 วัน
+6,calendar,day_of_month,int64,1–31,วันที่ของเดือน,,,0,1 – 31 (เฉลี่ย 15.7)
+7,calendar,is_payday_window,bool,bool,ช่วงเงินเดือนออก,day_of_month >= 25 หรือ <= 2,,0,True = 431 วัน
+8,holiday,holiday_name,string,text,ชื่อวันหยุดราชการ (อังกฤษ),"Python lib holidays (TH), ตัดวันเด็กออก",ไม่ใช่วันหยุดราชการ,1445,"HM Queen Sirikit The Queen Mother's Birthday; National Mother's Day, HM King Bhumibol Adulyadej the Great Memorial Day, Bridge Public Holiday, HM King Chulalongkorn Memorial Day"
+9,holiday,is_public_holiday,bool,bool,เป็นวันหยุดราชการ รวมวันหยุดชดเชย,"Python lib holidays (TH), ตัดวันเด็กออก",,0,True = 108 วัน
+10,holiday,is_bridge_holiday,bool,bool,วันหยุดพิเศษ (ครม. ประกาศเพิ่ม),holiday_name มีคำว่า Bridge,,0,True = 10 วัน
+11,holiday,is_songkran,bool,bool,วันสงกรานต์และวันชดเชยสงกรานต์,holiday_name มีคำว่า Songkran,,0,True = 15 วัน
+12,holiday,is_new_year,bool,bool,ช่วงปีใหม่,"31 ธ.ค., 1–2 ม.ค.",,0,True = 12 วัน
+13,holiday,is_long_weekend,bool,bool,อยู่ในช่วงหยุดติดกัน ≥3 วัน,วันหยุด = เสาร์-อาทิตย์ หรือ วันหยุดราชการ,,0,True = 156 วัน
+14,holiday,off_run_length,int64,days,ความยาวช่วงหยุดที่วันนี้อยู่,0 = วันทำงาน,,0,0 – 6 (เฉลี่ย 0.8)
+15,holiday,days_to_next_holiday,int64,days,อีกกี่วันถึงวันหยุดราชการถัดไป,0 = วันนี้เป็นวันหยุด,,0,0 – 61 (เฉลี่ย 19.4)
+16,chula_calendar,academic_year,int64,year (ค.ศ.),ปีการศึกษาจุฬาฯ (เริ่ม ส.ค.),raw/chula_academic_calendar.csv (ปฏิทิน CR90 ระบบทวิภาค จุฬาฯ),,0,2022 – 2026 (เฉลี่ย 2023.6)
+17,chula_calendar,term,string,S1/S2/SUMMER/BREAK,ภาคเรียน; BREAK = ปิดภาค,raw/chula_academic_calendar.csv (ปฏิทิน CR90 ระบบทวิภาค จุฬาฯ); ช่วงเทอม = วันเปิดเรียน ถึง วันสุดท้ายของสอบปลายภาค,,0,"BREAK, S1, S2, SUMMER"
+18,chula_calendar,term_phase,string,class/midterm/final/summer/break,ช่วงย่อยของเทอม,raw/chula_academic_calendar.csv (ปฏิทิน CR90 ระบบทวิภาค จุฬาฯ); final = หลังเรียนวันสุดท้าย ถึง สอบปลายภาควันสุดท้าย,,0,"break, class, midterm, final"
+19,chula_calendar,term_week,float64,week,สัปดาห์ที่เท่าไรของเทอม (นับจากวันเปิดเรียน),,ช่วงปิดภาค (BREAK),252,1 – 19 (เฉลี่ย 8.6)
+20,chula_calendar,is_exam,bool,bool,อยู่ในช่วงสอบกลางภาคหรือปลายภาค,"term_phase in (midterm, final)",,0,True = 183 วัน
+21,chula_calendar,is_pre_term_2w,bool,bool,14 วันก่อนเปิดภาค 1 / ภาค 2,สมมติฐาน: ตัดผมก่อนเปิดเทอม,,0,True = 119 วัน
+22,chula_calendar,is_first_2w_of_term,bool,bool,14 วันแรกของภาค 1 / ภาค 2,,,0,True = 126 วัน
+23,chula_calendar,is_pre_exam_1w,bool,bool,7 วันก่อนเริ่มสอบกลางภาคหรือปลายภาค,,,0,True = 119 วัน
+24,chula_calendar,is_post_final_1w,bool,bool,7 วันหลังสอบปลายภาคเสร็จ,,,0,True = 56 วัน
+25,chula_calendar,days_to_next_final,int64,days,อีกกี่วันถึงวันแรกของสอบปลายภาคถัดไป,,,0,0 – 209 (เฉลี่ย 91.1)
+26,event,is_graduation_ceremony,bool,bool,วันพิธีพระราชทานปริญญาบัตรจุฬาฯ (ปีการศึกษา 2564–2568),raw/campus_and_special_events.csv; ปีการศึกษา 2566 วันที่ 3 (4 ต.ค. 67) อนุมานจาก 'จัด 3 วัน',,0,True = 14 วัน
+27,event,is_graduation_season,bool,bool,ช่วงรับปริญญา (ซ้อม/ถ่ายรูป),28 วันก่อนพิธี ถึง วันสุดท้ายของพิธี,,0,True = 154 วัน
+28,event,is_cutu_football,bool,bool,ฟุตบอลประเพณีจุฬาฯ–ธรรมศาสตร์,"raw/campus_and_special_events.csv; 2024-03-31, 2025-02-15; ปี 2026 ไม่พบข้อมูล",,0,True = 2 วัน
+29,event,is_special_closure,bool,bool,จุฬาฯ ปิดเพราะน้ำท่วม (ร้านยังเปิด),raw/campus_and_special_events.csv; 2026-09-28 ถึง 29,,0,True = 2 วัน
+30,event,is_mourning_period,bool,bool,รัฐบาลขอให้งด/ลดกิจกรรมรื่นเริง 30 วันหลังพระพันปีหลวงสวรรคต,raw/campus_and_special_events.csv; 2025-10-24 ถึง 2025-11-22,,0,True = 30 วัน
+31,event,is_cny,bool,bool,วันตรุษจีน,raw/campus_and_special_events.csv,,0,True = 4 วัน
+32,event,is_loy_krathong,bool,bool,วันลอยกระทง,raw/campus_and_special_events.csv,,0,True = 4 วัน
+33,event,is_valentine,bool,bool,วันวาเลนไทน์ 14 ก.พ.,,,0,True = 4 วัน
+34,event,is_double_date_sale,bool,bool,วันเลขซ้ำ (1.1 … 12.12) วันแคมเปญช้อปออนไลน์,month == day_of_month,,0,True = 51 วัน
+35,event,days_to_next_graduation,float64,days,อีกกี่วันถึงวันแรกของพิธีรับปริญญาครั้งถัดไป,raw/campus_and_special_events.csv,หลัง 2 ต.ค. 2026 (ยังไม่มีวันพิธีถัดไป),31,0 – 365 (เฉลี่ย 168.8)
+36,weather_day,temp_max_c,float64,°C,อุณหภูมิสูงสุดของวัน (2 ม. เหนือพื้น),"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766); 00:00–23:00",,0,25.1 – 39.4 (เฉลี่ย 32.6)
+37,weather_day,temp_min_c,float64,°C,อุณหภูมิต่ำสุดของวัน,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,17.1 – 30.2 (เฉลี่ย 25.1)
+38,weather_day,temp_mean_c,float64,°C,อุณหภูมิเฉลี่ยของวัน,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,22 – 33.2 (เฉลี่ย 28.4)
+39,weather_day,feels_like_max_c,float64,°C,อุณหภูมิที่รู้สึกได้สูงสุด (รวมผลความชื้น ลม),"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,25.4 – 44.5 (เฉลี่ย 37.5)
+40,weather_day,rain_mm,float64,mm,ฝนรวมทั้งวัน,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,0 – 124.2 (เฉลี่ย 5.0)
+41,weather_day,rain_hours,int64,hours,จำนวนชั่วโมงที่ฝน ≥0.1 mm,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,0 – 24 (เฉลี่ย 5.5)
+42,weather_day,weather_code,int64,WMO code,"สภาพอากาศแย่สุดของวัน: 0–3 แจ่มใส–เมฆมาก, 51–55 ฝนปรอย, 61/63/65 ฝนเล็กน้อย/ปานกลาง/หนัก, 80–82 ฝนซู่, 95–96 พายุฝนฟ้าคะนอง","Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,0 – 96 (เฉลี่ย 46.7)
+43,weather_day,humidity_mean,int64,%,ความชื้นสัมพัทธ์เฉลี่ยของวัน,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,39 – 95 (เฉลี่ย 73.5)
+44,weather_open,rain_open_mm,float64,mm,ฝนรวมระหว่างร้านเปิด — ตัวหลักสำหรับวิเคราะห์ผลของฝน,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766); เวลาร้านเปิด 10:00–20:30; ค่าฝนรายชั่วโมงเวลา hh:00 = ฝนของชั่วโมงก่อนหน้า จึงรวม timestamp 11:00–21:00 (21:00 คูณ 0.5)",,0,0 – 51.2 (เฉลี่ย 3.3)
+45,weather_open,rain_open_hours,float64,hours,จำนวนชั่วโมงที่ฝน ≥0.5 mm ระหว่างร้านเปิด,เวลาร้านเปิด 10:00–20:30; ค่าฝนรายชั่วโมงเวลา hh:00 = ฝนของชั่วโมงก่อนหน้า จึงรวม timestamp 11:00–21:00 (21:00 คูณ 0.5),,0,0 – 10.5 (เฉลี่ย 1.3)
+46,weather_open,rain_peak_13to18_mm,float64,mm,ฝนช่วง 13:00–18:00 (ช่วงบิลหนาแน่นสุด),"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,0 – 30.4 (เฉลี่ย 2.1)
+47,weather_open,temp_max_open_c,float64,°C,อุณหภูมิสูงสุดระหว่าง 10:00–20:00,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,25.1 – 39.4 (เฉลี่ย 32.6)
+48,weather_open,feels_like_max_open_c,float64,°C,อุณหภูมิที่รู้สึกได้สูงสุดระหว่าง 10:00–20:00,"Open-Meteo Historical Forecast API, ECMWF IFS HRES ~9 km, cell 13.7434,100.4959 (~3 km from shop pin 13.7343861,100.521766)",,0,25.4 – 44.5 (เฉลี่ย 37.5)
+49,weather_models,ukmo_rain_open_mm,float64,mm,ฝนช่วงร้านเปิดจาก model UK Met Office (~10 km) ใช้เช็กความน่าเชื่อถือ,"Open-Meteo Historical Forecast API, cell 13.7813,100.5469; เวลาร้านเปิด 10:00–20:30; ค่าฝนรายชั่วโมงเวลา hh:00 = ฝนของชั่วโมงก่อนหน้า จึงรวม timestamp 11:00–21:00 (21:00 คูณ 0.5)",,0,0 – 43.8 (เฉลี่ย 4.3)
+50,weather_models,gfs_rain_open_mm,float64,mm,ฝนช่วงร้านเปิดจาก model NOAA GFS (~13 km) — มีค่าสุดโต่ง อย่าใช้เดี่ยวๆ,"Open-Meteo Historical Forecast API, cell 13.7651,100.5469; เวลาร้านเปิด 10:00–20:30; ค่าฝนรายชั่วโมงเวลา hh:00 = ฝนของชั่วโมงก่อนหน้า จึงรวม timestamp 11:00–21:00 (21:00 คูณ 0.5)",ต้นทางไม่มีข้อมูล 2022-11-30 ถึง 2022-12-14,15,0 – 155.2 (เฉลี่ย 1.8)
+51,weather_models,ens_rain_open_mm,float64,mm,"ค่าเฉลี่ยฝนช่วงร้านเปิดของ 3 model (ECMWF, UKMO, GFS)",เฉลี่ยเฉพาะ model ที่มีข้อมูลวันนั้น,,0,0 – 62.9 (เฉลี่ย 3.1)
+52,weather_models,ens_rain_mm,float64,mm,ค่าเฉลี่ยฝนทั้งวันของ 3 model,เฉลี่ยเฉพาะ model ที่มีข้อมูลวันนั้น,,0,0 – 92 (เฉลี่ย 4.9)
+53,weather_flag,is_rainy_day,bool,bool,มีฝน ≥1 mm ทั้งวัน — model ให้ฝนปรอยบ่อยเกินจริง (56% ของวัน) ใช้ระวัง,rain_mm >= 1,,0,True = 876 วัน
+54,weather_flag,is_heavy_rain,bool,bool,ฝนหนักทั้งวัน,rain_mm >= 20,,0,True = 82 วัน
+55,weather_flag,is_rain_during_open,bool,bool,ฝนตกระหว่างร้านเปิดอย่างมีนัย,rain_open_mm >= 5,,0,True = 379 วัน
+56,weather_flag,is_rain_during_open_ens,bool,bool,เหมือนข้างบน แต่ใช้ค่าเฉลี่ย 3 model,ens_rain_open_mm >= 5,,0,True = 390 วัน
+57,weather_flag,is_hot_day,bool,bool,ร้อนจัดระหว่างร้านเปิด,feels_like_max_open_c >= 40,,0,True = 304 วัน
+58,weather_flag,rain_mm_3d,float64,mm,ฝนสะสม 3 วันล่าสุด (รวมวันนี้) — สัญญาณน้ำท่วมขัง,rolling sum 3 วันของ rain_mm,,0,0 – 198.1 (เฉลี่ย 15.0)
+59,weather_flag,season,string,hot/rainy/cool,ฤดู,"hot = มี.ค.–พ.ค., rainy = มิ.ย.–ต.ค., cool = พ.ย.–ก.พ.",,0,"rainy, cool, hot"
