@@ -4,41 +4,43 @@ C02,warn,flag,1,channels,month missing between first and last channel month,2023
 C03,warn,flag,15,channels,month only partially recorded (days < days in month),2023-08-01 | 2023-09-01 | 2023-11-01 | 2024-01-01 | 2024-04-01
 C04,warn,exclude,59,sponsorships,sponsorship has no month,101 | 105 | 128 | 228 | 262
 C05,info,flag,13929,bills,bill has no customer_id (customer gave no phone),B000001 | B000002 | B000003 | B000004 | B000005
-K01,error,exclude,0,bills,bill_id is unique,NULL
-K02,error,exclude,0,bill_items,bill_items.bill_id exists in bills,NULL
-K03,error,exclude,0,promotions,promotions.bill_id exists in bills,NULL
-K04,warn,flag,0,bills,bills.customer_id exists in customers,NULL
-K05,error,exclude,0,customers,customer_id is unique,NULL
-K06,warn,flag,1,bills,bills.staff_code exists in staff,"ไม่ระบุ"
+C06,info,flag,782,bills,bill has no staff (source said ไม่ระบุ),B000008 | B000010 | B000019 | B000020 | B000021
+K01,error,exclude,0,bills,bill_id is unique,
+K02,error,exclude,0,bill_items,bill_items.bill_id exists in bills,
+K03,error,exclude,0,promotions,promotions.bill_id exists in bills,
+K04,warn,flag,0,bills,bills.customer_id exists in customers,
+K05,error,exclude,0,customers,customer_id is unique,
+K06,warn,flag,0,bills,bills.staff_code exists in staff,
 K07,warn,flag,16,bills,bill has at least one item,B004280 | B004796 | B007469 | B009024 | B010380
 KI01,warn,flag,1270,bills,first-visit unreliable 2025-10-13..2025-11-02,B057834 | B057835 | B057836 | B057837 | B057838
 KI02,info,flag,14806,bills,N tag incomplete before 2023-08-20,B000001 | B000002 | B000003 | B000004 | B000005
 KI03,warn,flag,2345,bills,"first visit in warm-up (data starts 2022-08; before 2023-02 many ""new"" are old)",B000019 | B000024 | B000026 | B000031 | B000032
 KI04,info,flag,22,marketing_ads,ad spend is estimated (clicks x CPC),2023-12-01 | 2024-01-01 | 2024-02-01 | 2024-03-01 | 2024-04-01
 KI05,info,flag,1,bills,has_foreigner_tag not recorded before 2026-10-12,bills.has_foreigner_tag
-M01,error,fix,0,promotions,campaign exists in campaign_map,NULL
-M02,error,fix,4,campaign_map,campaign_family / goal are valid values,"4. ตัดผมบุคคลทั่วไป ราคา 500 บาท | 4. ตัดผมบุคคลทั่วไป ราคา 540 บาท | ตัดผม + ทรีทเมนต์ ดีท็อก | ทรีทเมนต์ Joico - L'Oréal"
-M03,error,fix,3,stg,no unmapped code values,"bills.staff_type ไม่ระบุ | promotions.action | staff.role ผู้ช่วย/พนักงานอื่น"
-M04,error,fix,0,campaign_map,campaign key is unique in seed,NULL
-R01,error,flag,4945,bills,"sum(item revenue) = bill total (±1 THB)",B021442 | B021443 | B021444 | B021445 | B021446
-R02,warn,flag,5063,bills,item_count = number of item rows or total qty,B003452 | B007462 | B010890 | B021442 | B021443
-R03,error,flag,0,daily,"daily revenue = sum(bill totals) (±1 THB)",NULL
-R04,error,flag,0,daily,daily bills = count(bills),NULL
-R05,error,flag,1,monthly_summary,"monthly revenue = sum(daily revenue) (±1 THB)",2026-05-01
+KI06,info,fix,4964,bills,duplicated item/promo rows removed (export bug 2024-01-02..03-29),B021442 | B021443 | B021444 | B021445 | B021446
+M01,error,fix,0,promotions,campaign exists in campaign_map,
+M02,error,fix,0,campaign_map,campaign_family / goal are valid values,
+M03,error,fix,0,stg,no unmapped code values,
+M04,error,fix,0,campaign_map,campaign key is unique in seed,
+R01,error,flag,0,bills,sum(item revenue) = bill total (±1 THB),
+R02,warn,flag,99,bills,item_count = number of item rows or total qty,B003452 | B007462 | B010890 | B034700 | B035088
+R03,error,flag,0,daily,daily revenue = sum(bill totals) (±1 THB),
+R04,error,flag,0,daily,daily bills = count(bills),
+R05,error,flag,1,monthly_summary,monthly revenue = sum(daily revenue) (±1 THB),2026-05-01
 R06,warn,flag,9,channels,booking channels sum to booking_total,2024-01-01 | 2024-03-01 | 2025-01-01 | 2025-05-01 | 2025-11-01
 R07,warn,flag,13,channels,total_money within 2% of monthly revenue,2023-09-01 | 2023-11-01 | 2024-01-01 | 2024-07-01 | 2025-02-01
 R08,warn,flag,8,channels,requested + non_requested = customers_total,2025-03-01 | 2025-07-01 | 2025-08-01 | 2026-02-01 | 2026-04-01
-R09,warn,flag,801,bills,"sum(promo discounts) = bill discount (±1 THB)",B021443 | B021448 | B021450 | B021451 | B021452
-R10,error,flag,0,bill_items,item date = bill date,NULL
-R11,warn,flag,0,daily,daily new_customers = count(first-visit bills),NULL
+R09,warn,flag,0,bills,sum(promo discounts) = bill discount (±1 THB),
+R10,error,flag,0,bill_items,item date = bill date,
+R11,warn,flag,0,daily,daily new_customers = count(first-visit bills),
 V01,warn,flag,26,bills,hour within opening hours 9-21,B000443 | B000444 | B000445 | B000446 | B000447
-V02,error,exclude,0,bills,total_thb >= 0,NULL
-V03,error,exclude,0,bills,discount_thb >= 0,NULL
+V02,error,exclude,0,bills,total_thb >= 0,
+V03,error,exclude,0,bills,discount_thb >= 0,
 V04,warn,flag,2810,bills,"duration_min in (0, 480]",B000065 | B000226 | B000332 | B000433 | B000434
-V05,error,fix,0,bills,weekday matches date,NULL
-V06,error,fix,0,raw,count columns stored as DOUBLE are whole numbers,NULL
-V07,error,flag,0,customers,first_visit_date <= last_visit_date,NULL
-V08,error,flag,0,bills,"request_tag in (R, N) or NULL",NULL
-V09,warn,flag,0,bill_items,qty > 0,NULL
-V10,warn,flag,0,customers,pos_visit_days <= pos_bills,NULL
+V05,error,fix,0,bills,weekday matches date,
+V06,error,fix,0,raw,count columns stored as DOUBLE are whole numbers,
+V07,error,flag,0,customers,first_visit_date <= last_visit_date,
+V08,error,flag,0,bills,"request_tag in (R, N) or NULL",
+V09,warn,flag,0,bill_items,qty > 0,
+V10,warn,flag,0,customers,pos_visit_days <= pos_bills,
 V11,info,flag,350,bills,zero-value bill (free service),B000422 | B000523 | B000728 | B000836 | B000919

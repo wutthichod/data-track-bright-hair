@@ -42,12 +42,14 @@ SELECT * FROM (VALUES
   ('C03','channels',       'month only partially recorded (days < days in month)','warn', 'flag'),
   ('C04','sponsorships',   'sponsorship has no month',                            'warn', 'exclude'),
   ('C05','bills',          'bill has no customer_id (customer gave no phone)',    'info', 'flag'),
+  ('C06','bills',          'bill has no staff (source said ไม่ระบุ)',             'info', 'flag'),
   -- known issues (README)
   ('KI01','bills',         'first-visit unreliable 2025-10-13..2025-11-02',       'warn', 'flag'),
   ('KI02','bills',         'N tag incomplete before 2023-08-20',                  'info', 'flag'),
   ('KI03','bills',         'first visit in warm-up (data starts 2022-08; before 2023-02 many "new" are old)', 'warn','flag'),
   ('KI04','marketing_ads', 'ad spend is estimated (clicks x CPC)',                'info', 'flag'),
   ('KI05','bills',         'has_foreigner_tag not recorded before 2026-10-12',    'info', 'flag'),
+  ('KI06','bills',         'duplicated item/promo rows removed (export bug 2024-01-02..03-29)', 'info', 'fix'),
   -- mapping
   ('M01','promotions',     'campaign exists in campaign_map',                     'error','fix'),
   ('M02','campaign_map',   'campaign_family / goal are valid values',             'error','fix'),
@@ -89,7 +91,8 @@ SELECT 'K05', customer_id, count(*)::VARCHAR, '1'
   FROM stg.customers GROUP BY customer_id HAVING count(*) > 1
 UNION ALL
 SELECT 'K06', b.staff_code, count(*)::VARCHAR || ' bills', 'staff exists'
-  FROM stg.bills b ANTI JOIN stg.staff s USING (staff_code) GROUP BY b.staff_code
+  FROM (SELECT * FROM stg.bills WHERE staff_code IS NOT NULL) b
+  ANTI JOIN stg.staff s USING (staff_code) GROUP BY b.staff_code
 UNION ALL
 SELECT 'K07', b.bill_id, '0 items', '>= 1'
   FROM stg.bills b ANTI JOIN item_tot i USING (bill_id)
@@ -194,6 +197,8 @@ UNION ALL
 SELECT 'C04', sponsorship_id::VARCHAR, 'NULL', 'month' FROM stg.sponsorships WHERE month IS NULL
 UNION ALL
 SELECT 'C05', bill_id, 'NULL', 'customer_id' FROM stg.bills WHERE customer_id IS NULL
+UNION ALL
+SELECT 'C06', bill_id, 'NULL', 'staff_code' FROM stg.bills WHERE staff_code IS NULL
 
 -- KI: known issues
 UNION ALL
@@ -209,6 +214,11 @@ UNION ALL
 SELECT 'KI04', month::VARCHAR, 'est', 'actual' FROM stg.marketing_ads WHERE is_estimated
 UNION ALL
 SELECT 'KI05', 'bills.has_foreigner_tag', 'not recorded', 'from 2026-10-12'   -- column-level, one row
+UNION ALL
+SELECT 'KI06', r.bill_id, r.n_raw::VARCHAR || ' raw item rows', coalesce(s.n_stg, 0)::VARCHAR || ' kept'
+  FROM (SELECT bill_id, count(*) AS n_raw FROM raw.bill_items GROUP BY bill_id) r
+  LEFT JOIN (SELECT bill_id, count(*) AS n_stg FROM stg.bill_items GROUP BY bill_id) s USING (bill_id)
+  WHERE r.n_raw <> coalesce(s.n_stg, 0)
 
 -- M: mapping
 UNION ALL
@@ -226,6 +236,7 @@ SELECT 'M03', 'promotions.kind ' || kind_th, count(*)::VARCHAR, 'mapped'
 UNION ALL
 SELECT 'M03', 'promotions.action', count(*)::VARCHAR, 'mapped'
   FROM stg.promotions WHERE action = 'unmapped'
+  HAVING count(*) > 0             -- no GROUP BY -> aggregate always returns 1 row; only report if > 0
 UNION ALL
 SELECT 'M03', 'staff.role ' || role_th, count(*)::VARCHAR, 'mapped'
   FROM stg.staff WHERE role = 'unmapped' GROUP BY role_th

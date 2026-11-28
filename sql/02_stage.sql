@@ -1,4 +1,5 @@
--- 02_stg.sql : one cleaned table per raw table. Same row count as raw.
+-- 02_stg.sql : one cleaned table per raw table. Same row count as raw,
+-- except bill_items / promotions in the duplicated-export window (see KI06).
 CREATE SCHEMA IF NOT EXISTS stg;
 
 -- Text cleaner: drop zero-width chars, stray leading Thai vowel/tone marks,
@@ -14,6 +15,12 @@ CREATE OR REPLACE TEMP MACRO clean_text(x) AS
 CREATE OR REPLACE TEMP MACRO ym_to_date(x) AS
   CAST(clean_text(x) || '-01' AS DATE);
 
+-- KI06: export bug 2024-01-02..2024-03-29 — every bill's item rows and promo rows
+-- appear twice (the whole list, then a repeat; copy 2 often uses the new price-list
+-- name, same qty/revenue). Keep copy 1 (names match the price charged).
+CREATE OR REPLACE TEMP MACRO in_dup_window(d) AS
+  d BETWEEN DATE '2024-01-02' AND DATE '2024-03-29';
+
 -- ── bills ─────────────────────────────────────────────────────────────
 CREATE OR REPLACE TABLE stg.bills AS
 SELECT
@@ -23,9 +30,10 @@ SELECT
   clean_text(weekday)                         AS weekday,
   hour,
   duration_min,
-  clean_text(primary_staff)                   AS staff_code,
-  CASE left(clean_text(primary_staff), 1)
-       WHEN 'S' THEN 'stylist' WHEN 'T' THEN 'assistant_other'
+  NULLIF(clean_text(primary_staff), 'ไม่ระบุ') AS staff_code,      -- 'ไม่ระบุ' = not specified -> NULL
+  CASE WHEN NULLIF(clean_text(primary_staff), 'ไม่ระบุ') IS NULL THEN 'unknown'
+       WHEN left(clean_text(primary_staff), 1) = 'S' THEN 'stylist'
+       WHEN left(clean_text(primary_staff), 1) = 'T' THEN 'assistant_other'
        ELSE 'unmapped' END                    AS staff_type,
   upper(clean_text(request_tag))              AS request_tag,     -- 'R' / 'N' / NULL
   clean_text(customer_id)                     AS customer_id,
@@ -61,7 +69,11 @@ SELECT
   qty,
   revenue_thb,
   _row_num, _source_file
-FROM raw.bill_items;
+FROM (SELECT *,
+             row_number() OVER (PARTITION BY bill_id ORDER BY _row_num) AS _pos,
+             count(*)     OVER (PARTITION BY bill_id)                   AS _n
+      FROM raw.bill_items)
+WHERE NOT (in_dup_window(date) AND _n % 2 = 0 AND _pos > _n // 2);   -- KI06: drop copy 2
 
 -- ── promotions ────────────────────────────────────────────────────────
 CREATE OR REPLACE TABLE stg.promotions AS
@@ -87,7 +99,12 @@ SELECT
        WHEN 'vip' THEN 'VIP' END              AS member_tier,
   discount_thb,
   _row_num, _source_file
-FROM raw.promotions;
+FROM (SELECT p.*,
+             b.date AS _bill_date,                                    -- promotions has no date
+             row_number() OVER (PARTITION BY p.bill_id ORDER BY p._row_num) AS _pos,
+             count(*)     OVER (PARTITION BY p.bill_id)                     AS _n
+      FROM raw.promotions p LEFT JOIN raw.bills b USING (bill_id))
+WHERE NOT (in_dup_window(_bill_date) AND _n % 2 = 0 AND _pos > _n // 2);   -- KI06: drop copy 2
 
 -- ── customers ─────────────────────────────────────────────────────────
 CREATE OR REPLACE TABLE stg.customers AS
@@ -114,7 +131,10 @@ CREATE OR REPLACE TABLE stg.staff AS
 SELECT
   clean_text(code)                            AS staff_code,
   clean_text(role)                            AS role_th,
-  coalesce(NULLIF(regexp_extract(role, '\(([^)]+)\)', 1), ''), 'unmapped') AS role,
+  CASE clean_text(role)
+       WHEN 'ช่างทำผม (stylist)'    THEN 'stylist'
+       WHEN 'ผู้ช่วย/พนักงานอื่น' THEN 'assistant_other'
+       ELSE 'unmapped' END                    AS role,
   CASE left(clean_text(code), 1)
        WHEN 'S' THEN 'stylist' WHEN 'T' THEN 'assistant_other'
        ELSE 'unmapped' END                    AS staff_type,
